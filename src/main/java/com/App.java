@@ -23,6 +23,7 @@ public class App {
 			System.out.println("0 for exit");
 			System.out.println("1 for insert");
 			System.out.println("2 for list");
+			System.out.println("3 For View By Id");
 			System.out.println("Enter your choice");
 			int choice = scr.nextInt();
 			switch (choice) {
@@ -37,6 +38,7 @@ public class App {
 				int qty = scr.nextInt();
 				System.out.println("Enter author Name");
 				String author = scr.next();
+
 				BookBean book = new BookBean();
 				book.setAuthor(author);
 				book.setBookName(bookName);
@@ -45,9 +47,8 @@ public class App {
 
 				Session session = sf.openSession();
 				Transaction tx = session.beginTransaction();// insert update delete
-
 				session.save(book);// insert
-				tx.commit();
+				tx.commit();// commit
 				session.close();
 				break;
 			case 2:
@@ -60,6 +61,50 @@ public class App {
 				}
 				session.close();
 				break;
+			case 3:
+				System.out.println("Enter bookId");
+				int bId = scr.nextInt();
+
+				session = sf.openSession();
+				BookBean bookData = session.get(BookBean.class, bId);
+
+				if (bookData == null) {
+					System.out.println("Invalid Id");
+				} else {
+					System.out.println(bookData.getBookId() + " " + bookData.getBookName() + " " + bookData.getQty());
+				}
+
+				session.close();
+			case 4:
+				session = sf.openSession();
+				System.out.println("Enter bookId");
+				bId = scr.nextInt();
+				bookData = session.get(BookBean.class, bId);
+
+				if (bookData == null) {
+					System.out.println("Invalid Id");
+				} else {
+					System.out.println("Old Price : " + bookData.getPrice());
+					System.out.println("Enter new price?");
+					price = scr.nextInt();
+
+					System.out.println("Old Qty : " + bookData.getQty());
+					System.out.println("Enter new Qty");
+					qty = scr.nextInt();
+
+					bookData.setPrice(price);
+					bookData.setQty(qty);
+
+					Transaction tx1 = session.beginTransaction();
+					try {
+						session.update(bookData);
+						tx1.commit();
+					} catch (Exception e) {
+						tx1.rollback();
+					}
+				}
+				session.close();
+
 			}// switch
 		}
 	}// main

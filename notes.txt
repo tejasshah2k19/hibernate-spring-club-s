@@ -32,6 +32,8 @@ xml
 annotation
 java 
 
+Session session -> execute query 
+
 
 
 
