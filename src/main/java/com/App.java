@@ -24,6 +24,7 @@ public class App {
 			System.out.println("1 for insert");
 			System.out.println("2 for list");
 			System.out.println("3 For View By Id");
+			System.out.println("4 For Update By Id ");
 			System.out.println("Enter your choice");
 			int choice = scr.nextInt();
 			switch (choice) {
