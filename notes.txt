@@ -35,6 +35,124 @@ java
 Session session -> execute query 
 
 
+-------------------------------------------------------
+hiberante - db framework 
+
+ORM -> Object Relational Mapping 
+
+Configuration 
+SessionFactory 
+Session -> query 
+Transacation 
+Criteria 
+Query 
+
+ ****properties**** 
+    dialect 
+    ddl-auto 
+    showsql 
+
+
+
+
+map our class with table 
+1) xml 
+2) annotation 
+
+
+Relation
+Mapping 
+1:1 
+1:M
+M:1
+M:M 
+
+
+primary key -> generator => strategy =>
+
+*increment:- query last max record of pk 
+  
+auto
+
+identity# - increment  - mysql  msqql 
+
+sequence - oracle , pg 
+
+native# -> identity , sequence 
+
+uuid -> 32lenght -> ip 
+
+
+
+
+int x; -> int64 , bigint  , number 
+
+
+-------------------------------------------------------
+cache ? yes 
+1) primary 
+2) secondary
+
+
+
+user -->  product 
+      --> product 
+
+
+user -->   product -> server ---> hibernate ---> db server --> return data  
+                        primary cache -> product 
+
+user --> product -> server ---> hibernate --> primary cache -> if found -> return data 
+                                                                not found -----> db server --> return data 
+                                                                
+-------------------------------------------------------
+can we change data base after creating app? 
+can we use more that 1 database in one app ?
+when we used mapping / joins -> parent load -> child load ? loading in hibernate? 
+      1) Lazy -> user -> user only 
+      2) eagr -> user -> user and all other mappings 
+      
+      User 
+       1 to M -> orders 
+       
+      Order 
+
+--------------------------------------------------------
+
+user 
+	roleid 
+
+role 
+
+
+account
+	userid 
+ 
+
+LAZY 
+select * from user where userid = 5
+UserBean user  =  userRepo.findById(5)
+
+s.o.p(user.firstName);
+s.o.p(user.role.roleName);//query role 
+s.o.p(user.accounts); //query account 
+
+
+
+EAGER
+select * from user,role,account where userid = 5 join role and account 
+UserBean user  =  userRepo.findById(5)
+s.o.p(user.firstName);
+s.o.p(user.role.roleName);
+s.o.p(user.accounts); 
+
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
 
 
 
